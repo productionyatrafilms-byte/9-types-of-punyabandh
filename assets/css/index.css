@@ -1,0 +1,447 @@
+/* index.html — page styles (Frames 1-3: splash + topics onboarding, animated) */
+
+:root {
+    --color-purple-text: #7a32a1;
+    --color-title-start: #4222AA;
+    --color-title-end: #B12D99;
+    --color-peach-1: #ffd0a9;
+    --color-peach-2: #ffa659;
+    --color-cream-border: #fff2e2;
+    --color-divider: #dfd0de;
+    --color-hover-1: #C0A9FF;
+    --color-hover-2: #8D59FF;
+
+    --font-baloo: 'Baloo', sans-serif;
+    --font-krungthep: 'Krungthep', 'Comic Sans MS', system-ui, sans-serif;
+    --font-news: 'News701 BT', Georgia, serif;
+
+    --move-duration: 1s;
+    --move-ease: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+@font-face {
+    font-family: 'Baloo';
+    src: url('../../fonts/Baloo Regular 400.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'News701 BT';
+    src: url('../../fonts/NEWS701B.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Krungthep';
+    src: url('../../fonts/krungthep.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ITFDevanagari';
+    src: url('../../fonts/ITFDevanagari-Bold-02.otf') format('opentype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'NotoSansGujaratiBold';
+    src: url('../../fonts/NotoSansGujarati-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'NotoSansGujarati';
+    src: url('../../fonts/NotoSansGujarati-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+body {
+    background: #f4e2ea;
+}
+
+/* portrait: center the design box instead of leaving it pinned top-left */
+@media (orientation: portrait) {
+    body {
+        min-height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.hindi, .gujrati {
+    display: none;
+}
+
+.gujrati {
+    font-family: 'NotoSansGujarati', sans-serif;
+}
+
+.hindi {
+    font-family: 'ITFDevanagari', sans-serif;
+}
+
+.main-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+}
+
+.bg-img {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+/* ---------- decorative flowers: always rotating, shrink + move left on Enter ---------- */
+
+.decor {
+    position: absolute;
+    aspect-ratio: 1 / 1;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    transition: left var(--move-duration) var(--move-ease),
+                top var(--move-duration) var(--move-ease),
+                width var(--move-duration) var(--move-ease);
+}
+
+.decor__spin {
+    position: absolute;
+    inset: 0;
+    animation: decor-spin 10s linear infinite;
+}
+
+.decor img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+@keyframes decor-spin {
+    from {
+        transform: rotate(-72.64deg);
+    }
+    to {
+        transform: rotate(calc(-72.64deg + 360deg));
+    }
+}
+
+.fl1 {
+    left: 50%;
+    top: 51.95%;
+    width: 140vw;
+}
+
+.fl2 {
+    left: 119.6%;
+    top: 1.1%;
+    width: 50.17vw;
+    opacity: 0.35;
+}
+
+.main-container.settled .fl1 {
+    left: 17.77%;
+    top: 50%;
+    width: 76.8vw;
+}
+
+.main-container.settled .fl2 {
+    left: 99.3%;
+    top: 1.1%;
+    width: 50.17vw;
+}
+
+/* ---------- mascot: boy + divider move left, mat/shadow crossfade ---------- */
+
+.mascot {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.mascot__boy {
+    position: absolute;
+    display: block;
+    object-fit: cover;
+    z-index: 3;
+    left: 39.67%;
+    top: 7.87%;
+    width: 20.05%;
+    height: 54.75%;
+    transition: left var(--move-duration) var(--move-ease),
+                top var(--move-duration) var(--move-ease),
+                width var(--move-duration) var(--move-ease),
+                height var(--move-duration) var(--move-ease);
+}
+
+.main-container.settled .mascot__boy {
+    left: 6.72%;
+    top: 18.43%;
+    width: 22.92%;
+    height: 62.5%;
+}
+
+/* ---------- title: slides bottom -> top into the left-aligned "topics" spot ---------- */
+
+.title {
+    position: absolute;
+    width: 52%;
+    text-align: center;
+    font-family: var(--font-news);
+    font-weight: 700;
+    font-style: normal;
+    line-height: 1;
+    z-index: 4;
+    left: 24%;
+    top: 65.6%;
+    /* back button (settled -> splash): bottom first, then left */
+    transition: top 1.3s var(--move-ease),
+                left 1.3s var(--move-ease) 1.3s;
+}
+
+.main-container.settled .title {
+    left: 48%;
+    top: 14.5%;
+    /* enter button (splash -> settled): right first, then up */
+    transition: left 1.3s var(--move-ease),
+                top 1.3s var(--move-ease) 1.3s;
+}
+
+.title__line1,
+.title__line2 {
+    background: linear-gradient(90deg, var(--color-title-start) 0%, var(--color-title-end) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0.21vw 0.21vw rgba(0, 0, 0, 0.25);
+}
+
+.title__line1 {
+    display: block;
+    font-size: 3.33vw;
+    margin-bottom: 0.5vw;
+    white-space: nowrap;
+}
+
+.title__line2 {
+    display: block;
+    font-size: 5.73vw;
+    white-space: nowrap;
+}
+
+/* ---------- enter button (splash only) ---------- */
+
+.btn-enter {
+    position: absolute;
+    left: 45%;
+    top: 86.2%;
+    width: 10.02%;
+    height: 5.67%;
+    border: 0.16vw solid var(--color-cream-border);
+    border-radius: 50vw;
+    background: linear-gradient(to bottom, var(--color-peach-1), var(--color-peach-2));
+    box-shadow: 0 0.57vw 0.8vw -0.05vw rgba(0, 0, 0, 0.25);
+    color: #fff;
+    font-family: var(--font-baloo);
+    font-size: 1.875vw;
+    cursor: pointer;
+    z-index: 5;
+    opacity: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    line-height: 1;
+    padding: 0;
+    transition: opacity 0.35s ease, transform 0.2s ease, background 0.25s ease;
+}
+
+.btn-enter:hover {
+    background: linear-gradient(to bottom, var(--color-hover-1), var(--color-hover-2));
+    transform: scale(1.05);
+}
+
+.main-container.settled .btn-enter {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* ---------- back button (topics only) ---------- */
+
+.btn-back {
+    position: absolute;
+    left: 3.33%;
+    top: 4%;
+    width: 2.69%;
+    aspect-ratio: 1 / 1;
+    z-index: 6;
+    filter: drop-shadow(0 0.2vw 0.1vw rgba(0, 0, 0, 0.25));
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease 0.25s;
+}
+
+.btn-back img {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.main-container.settled .btn-back {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* ---------- topic pill list (topics only) ---------- */
+
+.pill-list {
+    position: absolute;
+    left: 63.1%;
+    top: 38.3%;
+    width: 21.9%;
+    display: flex;
+    flex-direction: column;
+    z-index: 5;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(70vw);
+    /* back button: pills go down first, right away */
+    transition: opacity 0.5s ease, transform 1s var(--move-ease);
+}
+
+.main-container.settled .pill-list {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+    /* enter button: rise together with the title's vertical phase */
+    transition: opacity 0.6s ease 1.3s, transform 1.3s var(--move-ease) 1.3s;
+}
+
+.pill {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 446 / 149;
+    margin-bottom: 4.9%;
+    background-image: url('../images/titletag.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    padding: 0 6%;
+}
+
+.pill:last-child {
+    margin-bottom: 0;
+}
+
+.pill::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--color-hover-1), var(--color-hover-2));
+    -webkit-mask-image: url('../images/titletag.png');
+    mask-image: url('../images/titletag.png');
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.pill:hover::after {
+    opacity: 1;
+}
+
+.pill__text {
+    position: relative;
+    z-index: 1;
+    font-family: var(--font-krungthep);
+    color: var(--color-purple-text);
+    text-align: center;
+    text-shadow: 0 0.1vw 0.1vw rgba(0, 0, 0, 0.2);
+    font-size: 1.35vw;
+    line-height: 1.2;
+    transition: color 0.25s ease;
+}
+
+.pill:hover .pill__text {
+    color: #fff;
+}
+
+/* ---------- leaving: navigating away to a topic page ---------- */
+
+.main-container.leaving .mascot {
+    transition: opacity 1.8s ease;
+    opacity: 0;
+}
+
+.main-container.leaving .title {
+    transition: transform 1.8s ease, opacity 1.8s ease;
+    transform: translateX(-130vw);
+    opacity: 0;
+}
+
+.main-container.leaving .pill-list {
+    transition: transform 1.8s ease, opacity 1.8s ease;
+    transform: translateX(-130vw);
+    opacity: 1;
+}
+
+/* ---------- language switch: restyled to match Figma (E/H/G pill) ---------- */
+
+#language {
+    background-color: transparent;
+    border: 0.104vw solid #775cd0;
+    border-radius: 50vw;
+    box-shadow: 0 0.21vw 0.1vw rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5vw;
+    padding: 0.5vw 0.8vw;
+}
+
+#langSelect label {
+    padding: 0 !important;
+}
+
+#langSelect label span {
+    width: 2.2vw;
+    height: 2.2vw;
+    border: 0.08vw solid #775cd0;
+    border-radius: 50%;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Baloo', sans-serif;
+    font-size: 1.3vw;
+    color: #775cd0;
+    padding: 0;
+    overflow: visible;
+}
+
+#langSelect input:checked + span {
+    background-image: none;
+    background-color: #775cd0;
+    color: #fff;
+    border-radius: 50%;
+}
