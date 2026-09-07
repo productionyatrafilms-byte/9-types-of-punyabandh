@@ -137,12 +137,13 @@ body {
 .main-container.state-detail .fl1 {
     left: -14.5%;
     top: 50%;
-    width: 96.22vw;
+    width: 70vw;
 }
 
 .main-container.state-detail .fl2 {
     left: 90.97%;
     top: -3.74%;
+    width: 30vw;
 }
 
 /* ---------- home button ---------- */

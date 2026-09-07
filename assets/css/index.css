@@ -386,25 +386,6 @@ body {
     color: #fff;
 }
 
-/* ---------- leaving: navigating away to a topic page ---------- */
-
-.main-container.leaving .mascot {
-    transition: opacity 1.8s ease;
-    opacity: 0;
-}
-
-.main-container.leaving .title {
-    transition: transform 1.8s ease, opacity 1.8s ease;
-    transform: translateX(-130vw);
-    opacity: 0;
-}
-
-.main-container.leaving .pill-list {
-    transition: transform 1.8s ease, opacity 1.8s ease;
-    transform: translateX(-130vw);
-    opacity: 1;
-}
-
 /* ---------- language switch: restyled to match Figma (E/H/G pill) ---------- */
 
 #language {

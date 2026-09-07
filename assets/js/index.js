@@ -27,12 +27,23 @@ document.addEventListener('DOMContentLoaded', function () {
                 return;
             }
             e.preventDefault();
-            topicAudio.currentTime = 0;
-            topicAudio.play().catch(function () {});
-            mainContainer.classList.add('leaving');
-            setTimeout(function () {
+
+            var navigated = false;
+            var go = function () {
+                if (navigated) { return; }
+                navigated = true;
                 window.location.href = href;
-            }, 1800);
+            };
+
+            topicAudio.currentTime = 0;
+            topicAudio.addEventListener('ended', go, { once: true });
+
+            var playPromise = topicAudio.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(go);
+            }
+
+            setTimeout(go, 600);
         });
     });
 });

@@ -159,9 +159,7 @@ document.addEventListener('DOMContentLoaded', function () {
             var swiperSlide = document.createElement('div');
             swiperSlide.className = 'swiper-slide';
             swiperSlide.innerHTML =
-                '<div class="photo-frame">' +
-                    '<video class="slide-video" src="' + slide.video + '" autoplay muted loop playsinline></video>' +
-                '</div>';
+                '<video class="slide-video" src="' + slide.video + '" autoplay muted loop playsinline></video>';
             typesSwiperWrapper.appendChild(swiperSlide);
 
             var textBox = document.createElement('div');
@@ -189,8 +187,7 @@ document.addEventListener('DOMContentLoaded', function () {
         typesSwiper = new Swiper('.typesSwiper', {
             slidesPerView: 1,
             speed: 400,
-            effect: 'fade',
-            fadeEffect: { crossFade: true },
+            effect: 'slide',
             initialSlide: startIndex,
             keyboard: { enabled: true, onlyInViewport: true },
             touchRatio: 1,
