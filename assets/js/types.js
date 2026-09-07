@@ -34,6 +34,15 @@ document.addEventListener('DOMContentLoaded', function () {
         );
     }
 
+    // custom.js applies the saved language before this script builds any of
+    // its own content, so freshly-created elements always default to English
+    // unless we re-apply the current language ourselves right after.
+    function syncLang() {
+        if (typeof val === 'function') {
+            val(sessionStorage.getItem('lang') || 'English');
+        }
+    }
+
     // ---------- build the 9 radial menu pills ----------
     subpointsData.forEach(function (sp) {
         var pill = document.createElement('a');
@@ -66,6 +75,8 @@ document.addEventListener('DOMContentLoaded', function () {
         });
         sidebarTrack.appendChild(item);
     });
+
+    syncLang();
 
     // ---------- sidebar: show 3 at a time, scroll with up/down.png ----------
     var sidebarScrollIndex = 0;
@@ -204,6 +215,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function revealSlider() {
+        syncLang();
         requestAnimationFrame(function () {
             requestAnimationFrame(function () {
                 sliderWrapper.classList.add('is-entered');
@@ -230,4 +242,14 @@ document.addEventListener('DOMContentLoaded', function () {
             mainContainer.classList.add('menu-revealed');
         });
     });
+
+    // ---------- deep-link: ?subpoint=9 jumps straight to that subpoint's last slide ----------
+    // (used by the pranam page's back button, which returns to Namaskaar Punya)
+    var deepLinkId = Number(new URLSearchParams(window.location.search).get('subpoint'));
+    if (deepLinkId) {
+        var deepLinkSp = getSubpoint(deepLinkId);
+        if (deepLinkSp && deepLinkSp.slides.length > 0) {
+            openDetail(deepLinkId, deepLinkSp.slides.length - 1);
+        }
+    }
 });

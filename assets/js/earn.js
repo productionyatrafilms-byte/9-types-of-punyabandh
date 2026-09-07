@@ -34,6 +34,13 @@ document.addEventListener('DOMContentLoaded', function () {
         textPanel.appendChild(textBox);
     });
 
+    // custom.js applies the saved language before this script builds its own
+    // content, so the freshly-created spans above always default to English
+    // unless we re-apply the current language ourselves right after.
+    if (typeof val === 'function') {
+        val(sessionStorage.getItem('lang') || 'English');
+    }
+
     var textBoxes = document.querySelectorAll('.text-box');
 
     function setActiveText(index) {
