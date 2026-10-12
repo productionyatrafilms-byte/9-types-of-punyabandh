@@ -90,3 +90,26 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
+// Slide videos: only the active slide's video preloads fully and plays; every other slide's
+// video is paused and set to preload "none" so it does not download until its slide is reached.
+// Slide videos are created with preload="none" and no autoplay; call this from the swiper's
+// init and slideChange handlers.
+function syncSlideVideos(swiper) {
+    swiper.slides.forEach(function (slide, index) {
+        var video = slide.querySelector('.slide-video');
+        if (!video) { return; }
+
+        if (index === swiper.activeIndex) {
+            video.preload = 'auto';
+            var playPromise = video.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(function () {});
+            }
+        } else {
+            video.preload = 'none';
+            video.pause();
+            video.currentTime = 0;
+        }
+    });
+}

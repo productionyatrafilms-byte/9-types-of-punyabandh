@@ -7,10 +7,10 @@
     <title>What do we earn from Punya? — 9 Types of Punya Bandh</title>
     <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href="./assets/plugins/swiper-bundle.min.css">
-    <link rel="stylesheet" href="./assets/css/define.css?v=4">
+    <link rel="stylesheet" href="./assets/css/define.css?v=8">
 </head>
 
-<body id="body">
+<body id="body" class="earn-page">
     <div id="langSelect">
         <div id="language">
             <label><input type="radio" onclick="val('English')" name="lang" id="en" value="English">
@@ -89,19 +89,30 @@
             <button type="button" class="btn-prev" aria-label="Previous">
                 <img src="./assets/images/prev.png" alt="">
             </button>
-            <button type="button" class="btn-next" aria-label="Next">
+            <!-- a div, not a <button>: Swiper sets the disabled attribute on a <button> at the last
+                 slide, and a disabled button swallows clicks, so it could never open the summary popup -->
+            <div role="button" tabindex="0" class="btn-next" aria-label="Next">
                 <img src="./assets/images/next.png" alt="">
-            </button>
+            </div>
         </div>
 
     </div>
 
-    <script src="./assets/js/djp.js"></script>
+    <div class="summary-modal" id="summaryModal" aria-hidden="true">
+        <div class="summary-modal__backdrop" id="summaryBackdrop"></div>
+        <div class="summary-modal__box" role="dialog" aria-modal="true">
+            <button type="button" class="summary-modal__close" id="summaryClose" aria-label="Close">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.7 4.3 12 10.6l6.3-6.3 1.4 1.4-6.3 6.3 6.3 6.3-1.4 1.4-6.3-6.3-6.3 6.3-1.4-1.4 6.3-6.3-6.3-6.3z"/></svg>
+            </button>
+            <p class="summary-modal__text" id="summaryText"></p>
+        </div>
+    </div>
+
     <script src="./assets/js/jquery-3.7.1.js"></script>
     <script src="./assets/js/custom.js"></script>
     <script src="./assets/plugins/swiper-bundle.min.js"></script>
     <script src="./assets/js/data.js"></script>
-    <script src="./assets/js/earn.js"></script>
+    <script src="./assets/js/earn.js?v=3"></script>
     <script src="./assets/js/step-badges.js"></script>
 </body>
 

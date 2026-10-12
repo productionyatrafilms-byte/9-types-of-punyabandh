@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', function () {
             var swiperSlide = document.createElement('div');
             swiperSlide.className = 'swiper-slide';
             swiperSlide.innerHTML =
-                '<video class="slide-video" src="' + slide.video + '" autoplay muted loop playsinline></video>';
+                '<video class="slide-video" src="' + slide.video + '" preload="none" muted loop playsinline></video>';
             typesSwiperWrapper.appendChild(swiperSlide);
 
             var textBox = document.createElement('div');
@@ -200,10 +200,12 @@ document.addEventListener('DOMContentLoaded', function () {
             on: {
                 init: function () {
                     updatePranamLink(this);
+                    syncSlideVideos(this);
                 },
                 slideChange: function () {
                     setActiveText(this.activeIndex);
                     updatePranamLink(this);
+                    syncSlideVideos(this);
                 },
             },
         });
