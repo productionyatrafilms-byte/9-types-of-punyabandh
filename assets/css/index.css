@@ -227,18 +227,22 @@ body {
     color: transparent;
     -webkit-text-fill-color: transparent;
     text-shadow: 0 0.21vw 0.21vw rgba(0, 0, 0, 0.25);
+    /* background-clip:text only paints inside the box; with line-height 1 the descenders
+       (y, p) and Indic matras get cut off, so pad the box and cancel it out with a negative margin */
+    padding: 0.12em 0 0.22em;
 }
 
 .title__line1 {
     display: block;
     font-size: 3.33vw;
-    margin-bottom: 0.5vw;
+    margin: -0.12em 0 calc(0.5vw - 0.22em);
     white-space: nowrap;
 }
 
 .title__line2 {
     display: block;
     font-size: 5.73vw;
+    margin: -0.12em 0 -0.22em;
     white-space: nowrap;
 }
 

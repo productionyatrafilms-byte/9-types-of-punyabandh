@@ -181,10 +181,9 @@ const subpointsData = [
     slides: [
       {
         video: "./assets/videos/3/1/1.mp4",
-        content: "Definition : It is earned by offering food to others.",
-        contenthi:
-          "परिभाषा : अन्न पुण्य दूसरों को भोजन देकर प्राप्त किया जाता है।",
-        contentgj: "વ્યાખ્યા : અન્ન પુણ્ય અન્યને ભોજન આપવાથી પ્રાપ્ત થાય છે.",
+        content: "It is earned by offering food to others.",
+        contenthi: "अन्न पुण्य दूसरों को भोजन देकर प्राप्त किया जाता है।",
+        contentgj: "અન્ન પુણ્ય અન્યને ભોજન આપવાથી પ્રાપ્ત થાય છે.",
       },
 
       {
@@ -414,7 +413,7 @@ const subpointsData = [
 
       {
         video: "./assets/videos/3/5/5.mp4",
-        content: "●	To donate blanket, raincoat, umbrella etc. to needy",
+        content: "To donate blanket, raincoat, umbrella etc. to needy",
         contenthi: " जरूरतमंदों को कंबल, रेनकोट, छाता आदि दान करना।",
         contentgj: "જરૂરિયાતમંદોને ધાબળા, રેઈનકોટ, છત્રી વગેરેનું દાન કરવું.",
       },
